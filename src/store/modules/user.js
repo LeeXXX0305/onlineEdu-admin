@@ -31,7 +31,7 @@ const user = {
       return new Promise((resolve, reject) => {
         login(username, userInfo.password).then(response => {
           const data = response.data
-          setToken("Bearer " + data.token)//登录成功后将token存储在cookie之中
+          setToken(data.token)//登录成功后将token存储在cookie之中
           // Cookies.set('Token', response.data.token) 
           commit('SET_TOKEN', data.token)
           resolve()
@@ -78,6 +78,7 @@ const user = {
     FedLogOut({ commit }) {
       return new Promise(resolve => {
         commit('SET_TOKEN', '')
+        commit('SET_ROLES', [])
         removeToken()
         resolve()
       })
