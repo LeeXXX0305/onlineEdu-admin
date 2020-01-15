@@ -31,7 +31,8 @@ const user = {
       return new Promise((resolve, reject) => {
         login(username, userInfo.password).then(response => {
           const data = response.data
-          setToken(data.token)
+          setToken("Bearer " + data.token)//登录成功后将token存储在cookie之中
+          // Cookies.set('Token', response.data.token) 
           commit('SET_TOKEN', data.token)
           resolve()
         }).catch(error => {
